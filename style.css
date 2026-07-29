@@ -1,0 +1,452 @@
+/* ==========================================
+   PROFESSIONAL TIC TAC TOE UI
+   ========================================== */
+
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================================
+   RESET
+   ========================================== */
+
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:"Poppins",sans-serif;
+
+    background:
+    radial-gradient(circle at top left,#b19bfa 0%,transparent 40%),
+    radial-gradient(circle at bottom right,#205ec1 0%,transparent 45%),
+    linear-gradient(135deg,#8e78fc,#3f7de1);
+
+    color:#ffffff;
+
+    overflow-x:hidden;
+    padding:25px;
+}
+
+/* ==========================================
+   MAIN CARD
+   ========================================== */
+
+.root{
+
+    width:min(480px,100%);
+    padding:35px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.30);
+
+    text-align:center;
+
+    animation:fadeUp .6s ease;
+}
+
+/* ==========================================
+   TITLE
+   ========================================== */
+
+.title{
+
+    font-size:2.2rem;
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    margin-bottom:28px;
+
+    text-shadow:
+    0 8px 18px rgba(0,0,0,.35);
+}
+
+/* ==========================================
+   SCORE CARD
+   ========================================== */
+
+.score-card{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:18px;
+
+    padding:18px;
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    color:#1e3a8a;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.12);
+
+    margin-bottom:28px;
+}
+
+.score{
+
+    flex:1;
+
+    padding:10px;
+
+    border-radius:12px;
+
+    background:#f8fafc;
+
+    font-size:17px;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.score:hover{
+
+    background:#eef4ff;
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================
+   GAME GRID
+   ========================================== */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:16px;
+
+    padding:18px;
+
+    border-radius:24px;
+
+    background:#ffffff;
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,.18);
+
+}
+
+/* ==========================================
+   GAME CELL
+   ========================================== */
+
+.cell{
+
+    aspect-ratio:1;
+
+    width:100%;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(145deg,#ffffff,#edf2f7);
+
+    color:#1f2937;
+
+    font-size:2.5rem;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+    transform .25s,
+    box-shadow .25s,
+    background .25s;
+
+    box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.8),
+    0 10px 18px rgba(0,0,0,.12);
+
+}
+
+.cell:hover{
+
+    transform:translateY(-5px);
+
+    background:
+    linear-gradient(145deg,#f7fbff,#e9f2ff);
+
+    box-shadow:
+    0 18px 28px rgba(0,0,0,.18);
+
+}
+
+.cell:active{
+
+    transform:scale(.95);
+
+}
+
+.cell:disabled{
+
+    cursor:not-allowed;
+
+    opacity:.9;
+
+}
+
+/* ==========================================
+   X & O COLORS
+   ========================================== */
+
+.cell.x{
+
+    color:#2563eb;
+
+}
+
+.cell.o{
+
+    color:#ef4444;
+
+}
+
+/* ==========================================
+   CONTROLS
+   ========================================== */
+
+.controls{
+
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-top:30px;
+
+}
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+
+.btn{
+
+    padding:14px 24px;
+
+    border:none;
+
+    border-radius:50px;
+
+    color:#fff;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:
+    .3s;
+
+    letter-spacing:.4px;
+
+    box-shadow:
+    0 12px 24px rgba(0,0,0,.22);
+
+}
+
+.btn:hover{
+
+    transform:
+    translateY(-4px);
+
+    box-shadow:
+    0 18px 30px rgba(0,0,0,.28);
+
+}
+
+.btn:active{
+
+    transform:scale(.96);
+
+}
+
+/* Blue */
+
+.btn.blue{
+
+    background:
+    linear-gradient(135deg,#3b82f6,#2563eb);
+
+}
+
+/* Gray */
+
+.btn.gray{
+
+    background:
+    linear-gradient(135deg,#6b7280,#374151);
+
+}
+
+/* Indigo */
+
+.btn.indigo{
+
+    background:
+    linear-gradient(135deg,#7c3aed,#4f46e5);
+
+}
+
+/* ==========================================
+   STATUS TEXT
+   ========================================== */
+
+.status{
+
+    margin-top:20px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:#ffffff;
+
+    letter-spacing:.5px;
+
+}
+
+/* ==========================================
+   WINNING CELL
+   ========================================== */
+
+.cell.winner{
+
+    background:
+    linear-gradient(135deg,#22c55e,#16a34a);
+
+    color:#fff;
+
+    animation:winner .7s infinite alternate;
+
+}
+
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+        transform:translateY(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes winner{
+
+    from{
+
+        transform:scale(1);
+
+    }
+
+    to{
+
+        transform:scale(1.08);
+
+    }
+
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media(max-width:600px){
+
+.root{
+
+    padding:22px;
+
+}
+
+.title{
+
+    font-size:1.8rem;
+
+}
+
+.grid{
+
+    gap:12px;
+    padding:12px;
+
+}
+
+.score-card{
+
+    flex-direction:column;
+
+}
+
+.btn{
+
+    width:100%;
+
+}
+
+.cell{
+
+    font-size:2rem;
+
+}
+
+}
+
+@media(max-width:380px){
+
+.title{
+
+    font-size:1.5rem;
+
+}
+
+.cell{
+
+    font-size:1.8rem;
+
+}
+
+}
